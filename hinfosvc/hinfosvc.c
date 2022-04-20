@@ -136,7 +136,7 @@ int main(int argc, char** argv){
     in[1023] = 0;
 
     //Compare request
-    char headers[] = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
+    char headers[128] = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
     char data[128] = "";
     if(strncmp(in, "GET /hostname ", strlen("GET /hostname ")) == 0)
       getName(data);
@@ -150,6 +150,8 @@ int main(int argc, char** argv){
     //Consume rest of data in socket
     if(size == 1023) 
       while(read(client_fd, in, 1023) == 1023);
+
+    printf("%s\n", headers);
 
     //Send the data
     if(send(client_fd, headers, strlen(headers), 0) < 0 || send(client_fd, data, strlen(data), 0) < 0 )
