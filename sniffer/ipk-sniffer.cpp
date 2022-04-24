@@ -8,6 +8,9 @@
 #include <netinet/tcp.h>
 #include <netinet/udp.h>
 #include <net/if_arp.h>
+#include <sys/socket.h>
+#include <net/ethernet.h>
+#include <arpa/inet.h>
 
 void error(std::string message){
     std::cerr << message << "\n";
